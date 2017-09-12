@@ -863,8 +863,10 @@ int32 field::get_control(uint16 step, effect* reason_effect, uint8 reason_player
 		if (zone){
 			fcount = get_useable_count(playerid, LOCATION_MZONE, playerid, LOCATION_REASON_CONTROL, zone);
 		} else if (targets->container.size() == 1) {
-			auto *cit = targets->container.begin();
-			card* pcard = *cit;
+			card* pcard;
+			for(auto cit = targets->container.begin(); cit != targets->container.end(); ++cit) {
+				card* pcard = *cit;
+			}
 			int32 seq = pcard->current.sequence;
 			if (seq > 4 && (!player[playerid].list_mzone[seq] || check_extra_link(playerid, pcard, 11 - seq)))
 				fcount = 1;
