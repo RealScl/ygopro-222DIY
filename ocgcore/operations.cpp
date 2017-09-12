@@ -919,7 +919,7 @@ int32 field::get_control(uint16 step, effect* reason_effect, uint8 reason_player
 		} else {
 			int32 czone = 1 << (11 - pcard->current.sequence);
 			pcard->set_status(STATUS_TO_LEAVE_FROMEX, TRUE);
-			move_to_field(pcard, playerid, playerid, LOCATION_MZONE, pcard->current.position, FALSE, 0, FALSE, zone);
+			move_to_field(pcard, playerid, playerid, LOCATION_MZONE, pcard->current.position, FALSE, 0, FALSE, czone);
 			pcard->set_status(STATUS_TO_LEAVE_FROMEX, FALSE);
 		}
 		pcard->fieldid = infos.field_id++;
