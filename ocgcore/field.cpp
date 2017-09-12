@@ -549,7 +549,7 @@ int32 field::is_location_useable(uint32 playerid, uint32 location, uint32 sequen
 // return: usable count of LOCATION_MZONE or real LOCATION_SZONE of playerid requested by uplayer (may be negative)
 int32 field::get_useable_count(card* pcard, uint8 playerid, uint8 location, uint8 uplayer, uint32 reason, uint32 zone, uint32* list, uint8 neglect_used) {
 	//222DIY
-	if (pcard->is_status(STATUS_IGNORE_LOCATION))
+	if (pcard->is_status(STATUS_TO_LEAVE_FROMEX))
 		return 1;
 	if(core.duel_rule >= 4 && location == LOCATION_MZONE && pcard->current.location == LOCATION_EXTRA)
 		return get_useable_count_fromex(pcard, playerid, uplayer, zone, list);

@@ -914,9 +914,9 @@ int32 field::get_control(uint16 step, effect* reason_effect, uint8 reason_player
 			move_to_field(pcard, playerid, playerid, LOCATION_MZONE, pcard->current.position, FALSE, 0, FALSE, zone);
 		} else {
 			int32 czone = 1 << (11 - pcard->current.sequence)
-			pcard->set_status(STATUS_IGNORE_LOCATION, TRUE);
+			pcard->set_status(STATUS_TO_LEAVE_FROMEX, TRUE);
 			move_to_field(pcard, playerid, playerid, LOCATION_MZONE, pcard->current.position, FALSE, 0, FALSE, zone);
-			pcard->set_status(STATUS_IGNORE_LOCATION, FALSE);
+			pcard->set_status(STATUS_TO_LEAVE_FROMEX, FALSE);
 		}
 		pcard->fieldid = infos.field_id++;
 		pcard->fieldid_r = pcard->fieldid;
