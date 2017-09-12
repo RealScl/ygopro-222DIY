@@ -858,7 +858,15 @@ int32 field::get_control(uint16 step, effect* reason_effect, uint8 reason_player
 			if(!change)
 				targets->container.erase(pcard);
 		}
-		int32 fcount = get_useable_count(playerid, LOCATION_MZONE, playerid, LOCATION_REASON_CONTROL, zone);
+		//222DIY
+		int32 fcount = 0;
+		if (zone){
+			fcount = get_useable_count(playerid, LOCATION_MZONE, playerid, LOCATION_REASON_CONTROL, zone);
+		} else {
+			int32 seq = pcard->current.sequence;
+			if (seq > 4 && (!player[playerid].list_mzone[seq] || check_extra_link(playerid, pcard, 11 - seq)))
+				fcount = 1;
+		}
 		if(fcount <= 0) {
 			destroy_set->swap(targets->container);
 			core.units.begin()->step = 5;
@@ -901,7 +909,15 @@ int32 field::get_control(uint16 step, effect* reason_effect, uint8 reason_player
 			return FALSE;
 		}
 		card* pcard = *targets->it;
-		move_to_field(pcard, playerid, playerid, LOCATION_MZONE, pcard->current.position, FALSE, 0, FALSE, zone);
+		//222DIY
+		if (zone){
+			move_to_field(pcard, playerid, playerid, LOCATION_MZONE, pcard->current.position, FALSE, 0, FALSE, zone);
+		} else {
+			int32 czone = 1 << (11 - pcard->current.sequence)
+			pcard->set_status(STATUS_IGNORE_LOCATION, TRUE);
+			move_to_field(pcard, playerid, playerid, LOCATION_MZONE, pcard->current.position, FALSE, 0, FALSE, zone);
+			pcard->set_status(STATUS_IGNORE_LOCATION, FALSE);
+		}
 		pcard->fieldid = infos.field_id++;
 		pcard->fieldid_r = pcard->fieldid;
 		return FALSE;
