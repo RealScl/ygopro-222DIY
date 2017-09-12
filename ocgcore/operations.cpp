@@ -862,7 +862,9 @@ int32 field::get_control(uint16 step, effect* reason_effect, uint8 reason_player
 		int32 fcount = 0;
 		if (zone){
 			fcount = get_useable_count(playerid, LOCATION_MZONE, playerid, LOCATION_REASON_CONTROL, zone);
-		} else {
+		} else if (targets->container.size() == 1) {
+			auto *cit = targets->container.begin();
+			card* pcard = *cit;
 			int32 seq = pcard->current.sequence;
 			if (seq > 4 && (!player[playerid].list_mzone[seq] || check_extra_link(playerid, pcard, 11 - seq)))
 				fcount = 1;
@@ -913,7 +915,7 @@ int32 field::get_control(uint16 step, effect* reason_effect, uint8 reason_player
 		if (zone){
 			move_to_field(pcard, playerid, playerid, LOCATION_MZONE, pcard->current.position, FALSE, 0, FALSE, zone);
 		} else {
-			int32 czone = 1 << (11 - pcard->current.sequence)
+			int32 czone = 1 << (11 - pcard->current.sequence);
 			pcard->set_status(STATUS_TO_LEAVE_FROMEX, TRUE);
 			move_to_field(pcard, playerid, playerid, LOCATION_MZONE, pcard->current.position, FALSE, 0, FALSE, zone);
 			pcard->set_status(STATUS_TO_LEAVE_FROMEX, FALSE);
