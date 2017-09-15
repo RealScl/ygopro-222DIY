@@ -912,17 +912,8 @@ uint32 card::get_rank() {
 	if(assume_type == ASSUME_RANK)
 		return assume_value;
 	//222DIY by somen00b
-	if(!(current.location & LOCATION_MZONE)) {
-		uint32 rk = data.level;
-		effect_set eset;
-		filter_effect(EFFECT_UPDATE_RANK, &eset, FALSE);
-		for (int32 i = 0; i < eset.size(); ++i) {
-			rk += eset[i]->get_value(this);
-		}
-		if(rk < 1 && (get_type() & TYPE_MONSTER))
-			rk = 1;
-		return rk;
-	}
+	if(!(current.location & LOCATION_MZONE))
+		return data.level;
 	if (temp.level != 0xffffffff)
 		return temp.level;
 	effect_set effects;
