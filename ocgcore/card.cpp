@@ -917,7 +917,7 @@ uint32 card::get_rank() {
 		effect_set eset;
 		filter_effect(EFFECT_UPDATE_RANK, &eset, FALSE);
 		for (int32 i = 0; i < eset.size(); ++i) {
-			rk += eset[i]->get_value(this)			
+			rk += eset[i]->get_value(this);
 		}
 		if(rk < 1 && (get_type() & TYPE_MONSTER))
 			rk = 1;
